@@ -1,12 +1,4 @@
-# 🎭 მაფიის თამაში — სრული ანიმაციური გვერდი
 
-ქვემოთ მოცემულია სრული HTML კოდი, რომელსაც შეუძლია შექმნას თანამედროვე, ანიმაციური Mafia / City Game სტილის ვებგვერდი.
-
----
-
-## 📄 index.html
-
-```html
 <!DOCTYPE html>
 <html lang="ka">
 <head>
@@ -294,9 +286,17 @@ button:hover{
     </div>
 
     <div class="section">
-        <h2>🎭 როლები</h2>
+        <h2>🎭 გაფართოებული როლები</h2>
 
         <div class="roles">
+
+            <div class="role-card">
+                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1200&auto=format&fit=crop" alt="პატიოსანი მოქალაქე">
+                <div class="role-content">
+                    <h3>🛡 7 პატიოსანი მოქალაქე</h3>
+                    <p>ქალაქის მთავარი ძალა, რომლებიც ცდილობენ ბოროტი ჯგუფების აღმოჩენას.</p>
+                </div>
+            </div>
 
             <div class="role-card">
                 <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1200&auto=format&fit=crop" alt="მოქალაქე">
@@ -330,7 +330,79 @@ button:hover{
                 </div>
             </div>
 
+                    <div class="role-card">
+                <img src="https://images.unsplash.com/photo-1528892952291-009c663ce843?q=80&w=1200&auto=format&fit=crop" alt="დონი">
+                <div class="role-content">
+                    <h3>👑 დონი</h3>
+                    <p>მაფიის ლიდერი, რომელიც მართავს ღამის მკვლელობებს.</p>
+                </div>
+            </div>
+
+            <div class="role-card">
+                <img src="https://images.unsplash.com/photo-1504593811423-6dd665756598?q=80&w=1200&auto=format&fit=crop" alt="მარჯვენა ხელი">
+                <div class="role-content">
+                    <h3>🗡 მარჯვენა ხელი</h3>
+                    <p>ამოწმებს მხოლოდ იაკუძას წევრებს. შოგუნის აღმოჩენა არ შეუძლია.</p>
+                </div>
+            </div>
+
+            <div class="role-card">
+                <img src="https://images.unsplash.com/photo-1541534401786-2077eed87a72?q=80&w=1200&auto=format&fit=crop" alt="ჩვეულებრივი მაფიოზი">
+                <div class="role-content">
+                    <h3>🎩 ჩვეულებრივი მაფიოზი</h3>
+                    <p>ასრულებს მაფიის დავალებებს და მონაწილეობს ღამის ფაზაში.</p>
+                </div>
+            </div>
+
+            <div class="role-card">
+                <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1200&auto=format&fit=crop" alt="შოგუნი">
+                <div class="role-content">
+                    <h3>⚔ შოგუნი</h3>
+                    <p>იაკუძას ბოსი, რომელიც დეტექტივისა და მარჯვენა ხელის მიერ არ მოწმდება.</p>
+                </div>
+            </div>
+
+            <div class="role-card">
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1200&auto=format&fit=crop" alt="რიგითი იაკუძა">
+                <div class="role-content">
+                    <h3>🥷 რიგითი იაკუძა</h3>
+                    <p>დაქირავებული მკვლელი. მისი ელიმინაციის შემდეგ იაკუძა ვეღარ კლავს.</p>
+                </div>
+            </div>
+
         </div>
+    </div>
+
+    <div class="section">
+        <h2>🌙 ღამის ფაზა</h2>
+        <ul class="rules-list">
+            <li>პირველ ღამეს იღვიძებს დონი, მარჯვენა ხელი და ჩვეულებრივი მაფიოზი.</li>
+            <li>მაფიის გუნდი ერთად ირჩევს სამიზნეს.</li>
+            <li>მარჯვენა ხელი ამოწმებს მხოლოდ იაკუძას წევრებს.</li>
+            <li>შოგუნი არ მოწმდება არც მაფიის და არც დეტექტივის მიერ.</li>
+            <li>ექიმი ყოველ ღამე ცდილობს მოთამაშის გადარჩენას.</li>
+            <li>დეტექტივი ამოწმებს მაფიას და იაკუძას.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>🏆 გამარჯვების პირობები</h2>
+        <ul class="rules-list">
+            <li>🥷 იაკუძა იგებს როდესაც რჩება 2v2 ან 1v1.</li>
+            <li>🕶 მაფია იგებს როდესაც რჩება 3v3, 2v2 ან 1v1.</li>
+            <li>🛡 პატიოსნები იგებენ თუ თამაშიდან გაიყვანენ ყველა მაფიოზს და იაკუძას.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>⭐ სპეციალური როლები</h2>
+        <ul class="rules-list">
+            <li>🔍 დეტექტივი ამოწმებს მაფიას და იაკუძას.</li>
+            <li>⚫ იაკუძა ითვლება შავ ბარათად ისევე როგორც მაფია.</li>
+            <li>👑 შოგუნი არ მოწმდება.</li>
+            <li>💉 ექიმს შეუძლია თითოეული მოთამაშის და საკუთარი თავის გადარჩენა მხოლოდ ერთხელ.</li>
+            <li>🛡 ექიმი ყოველ ღამე იღვიძებს მოქალაქეების გადასარჩენად.</li>
+        </ul>
     </div>
 
 </div>
@@ -339,7 +411,126 @@ button:hover{
     🎮 შექმენი შენი ლეგენდარული მაფიის თამაში
 </footer>
 
+<div class="section">
+        <h2>🎴 როლების დარიგება</h2>
+
+        <p style="margin-bottom:20px;">
+            მოთამაშეები რიგრიგობით ნახავენ საკუთარ საიდუმლო როლს როგორც Imposter-ის სტილში.
+        </p>
+
+        <input type="number" id="playerCount" min="5" max="20" value="10"
+        style="padding:15px;border-radius:10px;border:none;width:200px;font-size:18px;">
+
+        <button onclick="generateRoles()">🎲 როლების გენერაცია</button>
+
+        <div id="roleReveal" style="margin-top:30px;text-align:center;"></div>
+    </div>
+
 <script>
+
+const allRoles = [
+    '👑 დონი',
+    '🗡 მარჯვენა ხელი',
+    '🎩 მაფიოზი',
+    '⚔ შოგუნი',
+    '🥷 იაკუძა',
+    '💉 ექიმი',
+    '🔍 დეტექტივი',
+    '🛡 მოქალაქე',
+    '🛡 მოქალაქე',
+    '🛡 მოქალაქე',
+    '🛡 მოქალაქე',
+    '🛡 მოქალაქე',
+    '🛡 მოქალაქე',
+    '🛡 მოქალაქე',
+    '🛡 მოქალაქე',
+    '🛡 მოქალაქე',
+    '🛡 მოქალაქე',
+    '🛡 მოქალაქე',
+    '🛡 მოქალაქე',
+    '🛡 მოქალაქე'
+];
+
+let currentPlayer = 0;
+let shuffledRoles = [];
+
+function shuffle(array){
+    for(let i = array.length - 1; i > 0; i--){
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+function generateRoles(){
+
+    const count = parseInt(document.getElementById('playerCount').value);
+
+    if(count < 5 || count > 20){
+        alert('მოთამაშეების რაოდენობა უნდა იყოს 5-დან 20-მდე');
+        return;
+    }
+
+    shuffledRoles = shuffle([...allRoles]).slice(0,count);
+    currentPlayer = 0;
+
+    showNextPlayer();
+}
+
+function showNextPlayer(){
+
+    const reveal = document.getElementById('roleReveal');
+
+    if(currentPlayer >= shuffledRoles.length){
+
+        reveal.innerHTML = `
+            <h2 style="color:#00ffcc;">✅ ყველა როლი დარიგებულია</h2>
+            <p style="margin-top:15px;font-size:22px;">თამაში მზადაა დასაწყებად 🎭</p>
+        `;
+
+        return;
+    }
+
+    reveal.innerHTML = `
+        <div style="background:rgba(255,255,255,0.08);padding:40px;border-radius:25px;max-width:500px;margin:auto;animation:fadeUp 0.8s;">
+
+            <h2 style="margin-bottom:20px;color:#ff4444;">👤 მოთამაშე ${currentPlayer + 1}</h2>
+
+            <button onclick="revealRole()">🎭 როლის ნახვა</button>
+
+        </div>
+    `;
+}
+
+function revealRole(){
+
+    const reveal = document.getElementById('roleReveal');
+
+    reveal.innerHTML = `
+        <div style="background:rgba(255,255,255,0.08);padding:40px;border-radius:25px;max-width:500px;margin:auto;animation:fadeUp 0.8s;">
+
+            <h1 style="font-size:50px;color:#00ffcc;margin-bottom:20px;">
+                ${shuffledRoles[currentPlayer]}
+            </h1>
+
+            <p style="font-size:20px;color:#ddd;">
+                დაიმახსოვრე შენი როლი და გადაეცი შემდეგ მოთამაშეს.
+            </p>
+
+            <button onclick="nextPlayer()" style="margin-top:30px;">
+                ➡ შემდეგი მოთამაშე
+            </button>
+
+        </div>
+    `;
+}
+
+function nextPlayer(){
+    currentPlayer++;
+    showNextPlayer();
+}
+
+
 let time = 60;
 let timer;
 
