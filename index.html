@@ -235,8 +235,8 @@ button:hover{
 <div class="container">
 
     <div style="text-align:center;margin-top:20px;">
-        <button onclick="toggleGameSetup()">🎮 თამაშის დაწყება</button>
-        <button onclick="toggleRules()">📜 წესები</button>
+        <button type="button" onclick="toggleGameSetup()">🎮 თამაშის დაწყება</button>
+        <button type="button" onclick="toggleRules()">📜 წესები</button>
     </div>
 
     <div id="gameSetup" style="display:none;margin-top:35px;background:rgba(255,255,255,0.06);padding:30px;border-radius:25px;">
@@ -245,13 +245,13 @@ button:hover{
 
         <div style="display:flex;justify-content:center;align-items:center;gap:20px;margin-bottom:30px;">
 
-            <button onclick="decreasePlayers()" style="width:70px;height:70px;font-size:40px;">-</button>
+            <button type="button" onclick="decreasePlayers()" style="width:70px;height:70px;font-size:40px;">-</button>
 
             <div id="playerCounter" style="font-size:50px;color:#00ffcc;font-weight:bold;">
                 9
             </div>
 
-            <button onclick="increasePlayers()" style="width:70px;height:70px;font-size:40px;">+</button>
+            <button type="button" onclick="increasePlayers()" style="width:70px;height:70px;font-size:40px;">+</button>
 
         </div>
 
@@ -513,6 +513,12 @@ function shuffle(array){
 
 function createSpeechPlayers(){
 
+    const speechContainer = document.getElementById('speechPlayers');
+
+    if(!speechContainer){
+        return;
+    }
+
     const container = document.getElementById('speechPlayers');
     const count = parseInt(document.getElementById('playerCount').value);
 
@@ -537,6 +543,13 @@ function createSpeechPlayers(){
         `;
     }
 }
+
+window.addEventListener('DOMContentLoaded',()=>{
+    createPlayerInputs();
+    if(typeof createSpeechPlayers === 'function'){
+        createSpeechPlayers();
+    }
+});
 
 function toggleGameSetup(){
 
@@ -576,6 +589,10 @@ function createPlayerInputs(){
 
     const count = parseInt(document.getElementById('playerCount').value);
     const container = document.getElementById('playerNames');
+
+    if(!container){
+        return;
+    }
 
     container.innerHTML = '';
 
