@@ -235,6 +235,12 @@ button:hover{
 
 <div class="container">
 
+    <div style="text-align:center;margin-top:20px;">
+        <button onclick="toggleRules()">📜 წესები</button>
+    </div>
+
+    <div id="rulesPage" style="display:none;">
+
     <div class="section">
         <h2>☀ დღის ფაზის წესები</h2>
         <ul class="rules-list">
@@ -432,6 +438,8 @@ button:hover{
 
 </div>
 
+</div>
+
 <footer>
     🎮 შექმენი შენი ლეგენდარული მაფიის თამაში
 </footer>
@@ -443,7 +451,9 @@ button:hover{
             მოთამაშეები რიგრიგობით ნახავენ საკუთარ საიდუმლო როლს როგორც Imposter-ის სტილში.
         </p>
 
-        <input type="number" id="playerCount" min="5" max="20" value="10"
+        <div id="playerNames" style="margin-bottom:25px;"></div>
+
+        <input type="number" id="playerCount" min="5" max="20" value="10" onchange="createPlayerInputs()"
         style="padding:15px;border-radius:10px;border:none;width:200px;font-size:18px;">
 
         <button onclick="generateRoles()">🎲 როლების გენერაცია</button>
@@ -487,6 +497,30 @@ function shuffle(array){
     return array;
 }
 
+function createPlayerInputs(){
+
+    const count = parseInt(document.getElementById('playerCount').value);
+    const container = document.getElementById('playerNames');
+
+    container.innerHTML = '';
+
+    for(let i=1;i<=count;i++){
+
+        container.innerHTML += `
+            <div style="margin-bottom:12px;">
+                <input
+                    type="text"
+                    id="playerName${i}"
+                    placeholder="👤 მოთამაშე ${i} სახელი"
+                    style="padding:14px;border:none;border-radius:12px;width:100%;max-width:350px;font-size:17px;"
+                >
+            </div>
+        `;
+    }
+}
+
+createPlayerInputs();
+
 function generateRoles(){
 
     const count = parseInt(document.getElementById('playerCount').value);
@@ -519,7 +553,7 @@ function showNextPlayer(){
     reveal.innerHTML = `
         <div style="background:rgba(255,255,255,0.08);padding:40px;border-radius:25px;max-width:500px;margin:auto;animation:fadeUp 0.8s;">
 
-            <h2 style="margin-bottom:20px;color:#ff4444;">👤 მოთამაშე ${currentPlayer + 1}</h2>
+            <h2 style="margin-bottom:20px;color:#ff4444;">👤 ${document.getElementById(`playerName${currentPlayer+1}`).value || `მოთამაშე ${currentPlayer+1}`}</h2>
 
             <button onclick="revealRole()">🎭 როლის ნახვა</button>
 
@@ -647,24 +681,51 @@ function addFoul(player){
         alert(`მოთამაშე ${player} ავტომატურად გავარდა თამაშიდან!`);
     }
 }
+
 createFoulSystem();
+
+/* ===== წესების გვერდი ===== */
+
+function toggleRules(){
+
+    const rules = document.getElementById('rulesPage');
+
+    if(rules.style.display === 'none'){
+        rules.style.display = 'block';
+        window.scrollTo({top:200,behavior:'smooth'});
+    }else{
+        rules.style.display = 'none';
+    }
+}
+
+
 let time = 60;
 let timer;
+
 function startTimer(){
+
     clearInterval(timer);
     time = 60;
+
     timer = setInterval(()=>{
+
         let minutes = Math.floor(time/60);
         let seconds = time % 60;
+
         seconds = seconds < 10 ? '0'+seconds : seconds;
+
         document.getElementById('timer').innerHTML = `${minutes}:${seconds}`;
+
         if(time <= 0){
             clearInterval(timer);
             document.getElementById('timer').innerHTML = '⏰ დრო დასრულდა';
         }
+
         time--;
+
     },1000);
 }
 </script>
+
 </body>
 </html>
