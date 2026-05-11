@@ -229,8 +229,7 @@ button:hover{
     <h1>🎭 მაფიის თამაში</h1>
     <p>სტრატეგია • ფსიქოლოგია • ეჭვი • გადარჩენა</p>
 
-    <button onclick="startTimer()">▶ დღის ტაიმერის დაწყება</button>
-    <div class="timer" id="timer">01:00</div>
+    
 </header>
 
 <div class="container">
@@ -426,15 +425,11 @@ button:hover{
     </div>
 
     <div class="section">
-        <h2>⚠ ფოლების სისტემა</h2>
-
-        <p style="margin-bottom:25px;">
-            თითო მოთამაშეს აქვს მაქსიმუმ 3 ფოლი. 3 ფოლის მიღების შემდეგ მოთამაშე ავტომატურად ტოვებს თამაშს.
-        </p>
-
-        <div id="foulSystem"></div>
-
+        <h2>🎤 მოთამაშეების სასაუბრო დრო</h2>
+        <div id="speechPlayers"></div>
     </div>
+
+</div>
 
 </div>
 
@@ -497,6 +492,33 @@ function shuffle(array){
     return array;
 }
 
+function createSpeechPlayers(){
+
+    const container = document.getElementById('speechPlayers');
+    const count = parseInt(document.getElementById('playerCount').value);
+
+    container.innerHTML = '';
+
+    for(let i=1;i<=count;i++){
+
+        const playerName = document.getElementById(`playerName${i}`)?.value || `მოთამაშე ${i}`;
+
+        container.innerHTML += `
+            <div style="background:rgba(255,255,255,0.08);padding:20px;border-radius:20px;margin-bottom:15px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px;">
+
+                <h3>🎙 ${playerName}</h3>
+
+                <div id="speech${i}" style="font-size:28px;color:#00ffcc;">
+                    00:30
+                </div>
+
+                <button onclick="startPlayerSpeech(${i})">▶ საუბრის დაწყება</button>
+
+            </div>
+        `;
+    }
+}
+
 function createPlayerInputs(){
 
     const count = parseInt(document.getElementById('playerCount').value);
@@ -522,6 +544,8 @@ function createPlayerInputs(){
 createPlayerInputs();
 
 function generateRoles(){
+
+    createSpeechPlayers();
 
     const count = parseInt(document.getElementById('playerCount').value);
 
@@ -565,14 +589,57 @@ function revealRole(){
 
     const reveal = document.getElementById('roleReveal');
 
-    reveal.innerHTML = `
-        <div style="background:rgba(255,255,255,0.08);padding:40px;border-radius:25px;max-width:500px;margin:auto;animation:fadeUp 0.8s;">
+    const role = shuffledRoles[currentPlayer];
 
-            <h1 style="font-size:50px;color:#00ffcc;margin-bottom:20px;">
-                ${shuffledRoles[currentPlayer]}
+    const roleData = {
+        '👑 დონი': {
+            image:'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1200&auto=format&fit=crop',
+            text:'მაფიის ლიდერი. ღამით მართავს მკვლელობებს და აკონტროლებს გუნდს.'
+        },
+        '🗡 მარჯვენა ხელი': {
+            image:'https://images.unsplash.com/photo-1504593811423-6dd665756598?q=80&w=1200&auto=format&fit=crop',
+            text:'ამოწმებს მხოლოდ იაკუძას წევრებს.'
+        },
+        '🎩 მაფიოზი': {
+            image:'https://images.unsplash.com/photo-1541534401786-2077eed87a72?q=80&w=1200&auto=format&fit=crop',
+            text:'ასრულებს მაფიის მისიებს და მონაწილეობს ღამის მკვლელობაში.'
+        },
+        '⚔ შოგუნი': {
+            image:'https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1200&auto=format&fit=crop',
+            text:'იაკუძას ბოსი. ვერავინ ამოწმებს.'
+        },
+        '🥷 იაკუძა': {
+            image:'https://images.unsplash.com/photo-1521119989659-a83eee488004?q=80&w=1200&auto=format&fit=crop',
+            text:'დაქირავებული მკვლელი რომელიც შოგუნისთვის მუშაობს.'
+        },
+        '💉 ექიმი': {
+            image:'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=1200&auto=format&fit=crop',
+            text:'ყოველ ღამეს შეუძლია მოთამაშის გადარჩენა.'
+        },
+        '🔍 დეტექტივი': {
+            image:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1200&auto=format&fit=crop',
+            text:'ამოწმებს მაფიას და იაკუძას.'
+        },
+        '🛡 მოქალაქე': {
+            image:'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1200&auto=format&fit=crop',
+            text:'უნდა იპოვოს და გააგდოს ბოროტი როლები.'
+        }
+    };
+
+    reveal.innerHTML = `
+        <div style="background:linear-gradient(145deg,#111,#1f1f1f);padding:30px;border-radius:30px;max-width:420px;margin:auto;animation:fadeUp 0.8s;box-shadow:0 0 35px rgba(255,0,0,0.4);overflow:hidden;">
+
+            <img src="${roleData[role].image}" style="width:100%;height:260px;object-fit:cover;border-radius:20px;margin-bottom:20px;">
+
+            <h1 style="font-size:42px;color:#00ffcc;margin-bottom:15px;">
+                ${role}
             </h1>
 
-            <p style="font-size:20px;color:#ddd;">
+            <p style="font-size:18px;color:#ddd;line-height:1.7;">
+                ${roleData[role].text}
+            </p>
+
+            <p style="font-size:18px;color:#aaa;margin-top:20px;">
                 დაიმახსოვრე შენი როლი და გადაეცი შემდეგ მოთამაშეს.
             </p>
 
@@ -702,19 +769,7 @@ function toggleRules(){
 let time = 60;
 let timer;
 
-function startTimer(){
-
-    clearInterval(timer);
-    time = 60;
-
-    timer = setInterval(()=>{
-
-        let minutes = Math.floor(time/60);
-        let seconds = time % 60;
-
-        seconds = seconds < 10 ? '0'+seconds : seconds;
-
-        document.getElementById('timer').innerHTML = `${minutes}:${seconds}`;
+:${seconds}`;
 
         if(time <= 0){
             clearInterval(timer);
