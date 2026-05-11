@@ -405,6 +405,31 @@ button:hover{
         </ul>
     </div>
 
+    <div class="section">
+        <h2>🌗 დღე / ღამის სისტემა</h2>
+
+        <div style="text-align:center; margin-top:20px;">
+            <h1 id="phaseTitle" style="font-size:60px;color:#00ffcc;">☀ დღე</h1>
+
+            <button onclick="togglePhase()">🔄 ფაზის შეცვლა</button>
+
+            <div class="timer" id="speechTimer">00:30</div>
+
+            <button onclick="startSpeechTimer()">🎤 30 წამიანი საუბარი</button>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>⚠ ფოლების სისტემა</h2>
+
+        <p style="margin-bottom:25px;">
+            თითო მოთამაშეს აქვს მაქსიმუმ 3 ფოლი. 3 ფოლის მიღების შემდეგ მოთამაშე ავტომატურად ტოვებს თამაშს.
+        </p>
+
+        <div id="foulSystem"></div>
+
+    </div>
+
 </div>
 
 <footer>
@@ -530,34 +555,116 @@ function nextPlayer(){
     showNextPlayer();
 }
 
+/* ===== დღე / ღამე ===== */
 
+let isDay = true;
+
+function togglePhase(){
+
+    const phase = document.getElementById('phaseTitle');
+
+    if(isDay){
+        phase.innerHTML = '🌙 ღამე';
+        phase.style.color = '#9b5cff';
+        document.body.style.background = '#020214';
+    }else{
+        phase.innerHTML = '☀ დღე';
+        phase.style.color = '#00ffcc';
+        document.body.style.background = '#050505';
+    }
+
+    isDay = !isDay;
+}
+
+/* ===== 30 წამიანი საუბარი ===== */
+
+let speechTime = 30;
+let speechInterval;
+
+function startSpeechTimer(){
+
+    clearInterval(speechInterval);
+    speechTime = 30;
+
+    speechInterval = setInterval(()=>{
+
+        let seconds = speechTime < 10 ? '0'+speechTime : speechTime;
+
+        document.getElementById('speechTimer').innerHTML = `00:${seconds}`;
+
+        if(speechTime <= 0){
+            clearInterval(speechInterval);
+            document.getElementById('speechTimer').innerHTML = '⏰ დრო დასრულდა';
+        }
+
+        speechTime--;
+
+    },1000);
+}
+
+/* ===== ფოლების სისტემა ===== */
+
+const foulContainer = document.getElementById('foulSystem');
+
+function createFoulSystem(){
+
+    foulContainer.innerHTML = '';
+
+    for(let i=1;i<=20;i++){
+
+        foulContainer.innerHTML += `
+            <div style="background:rgba(255,255,255,0.08);padding:20px;border-radius:18px;margin-bottom:15px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+
+                <h3>👤 მოთამაშე ${i}</h3>
+
+                <div id="fouls${i}" style="font-size:22px;color:#ff4444;">
+                    ⚠ 0 / 3
+                </div>
+
+                <button onclick="addFoul(${i})">➕ ფოლი</button>
+
+            </div>
+        `;
+    }
+}
+
+const foulCounts = {};
+
+function addFoul(player){
+
+    if(!foulCounts[player]){
+        foulCounts[player] = 0;
+    }
+
+    foulCounts[player]++;
+
+    document.getElementById(`fouls${player}`).innerHTML = `⚠ ${foulCounts[player]} / 3`;
+
+    if(foulCounts[player] >= 3){
+
+        document.getElementById(`fouls${player}`).innerHTML = '❌ თამაშიდან გავარდა';
+
+        alert(`მოთამაშე ${player} ავტომატურად გავარდა თამაშიდან!`);
+    }
+}
+createFoulSystem();
 let time = 60;
 let timer;
-
 function startTimer(){
-
     clearInterval(timer);
     time = 60;
-
     timer = setInterval(()=>{
-
         let minutes = Math.floor(time/60);
         let seconds = time % 60;
-
         seconds = seconds < 10 ? '0'+seconds : seconds;
-
         document.getElementById('timer').innerHTML = `${minutes}:${seconds}`;
-
         if(time <= 0){
             clearInterval(timer);
             document.getElementById('timer').innerHTML = '⏰ დრო დასრულდა';
         }
-
         time--;
-
     },1000);
 }
 </script>
-
 </body>
 </html>
